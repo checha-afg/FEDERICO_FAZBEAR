@@ -1,5 +1,23 @@
+const express = require('express');
 const oracledb = require('oracledb');
 const config = require('./app/config/env'); // archivo env.js
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware para parsear JSON
+app.use(express.json());
+
+// Importar las rutas
+const router = require('./app/routers/router.js');
+
+// Aplicar el prefijo /api a todas las rutas
+app.use('/api', router);
+
+// Ruta de prueba para verificar que el servidor está funcionando
+app.get('/', (req, res) => {
+  res.send('Servidor funcionando');
+});
 
 async function init() {
   let connection;
@@ -28,3 +46,8 @@ async function init() {
 }
 
 init();
+
+// Inicia el servidor Express
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en puerto ${PORT}`);
+});

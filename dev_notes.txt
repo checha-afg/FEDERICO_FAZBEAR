@@ -1,3 +1,2 @@
 Cosas por hacer:
-    - CRUD USUARIO
-    - Revisar JIRA
+    - Combinar controladores
